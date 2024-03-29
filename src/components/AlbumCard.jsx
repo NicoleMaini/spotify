@@ -1,6 +1,6 @@
 import { Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addSong, playSong } from "../actions";
+import { playSong } from "../actions";
 
 function AlbumCard({ album }) {
   const dispatch = useDispatch();
@@ -15,17 +15,6 @@ function AlbumCard({ album }) {
           dispatch(playSong(album));
         }}
       />
-
-      <div
-        className="heart"
-        onClick={() => {
-          dispatch(addSong(album));
-        }}
-      >
-        <i className="bi bi-heart text-white"></i>
-      </div>
-
-      {/* <i className="bi bi-heart-fill"></i> */}
       <p className="mb-0">
         Track: "{`${album.title.length < 16 ? `${album.title}` : `${album.title.substring(0, 16)}...`}`}"
       </p>

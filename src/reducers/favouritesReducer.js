@@ -2,6 +2,7 @@ import { ADD_LIST, REMOVE_ITEM } from "../actions";
 
 const inState = {
   cont: [], // reppresentazione del contenuto della nostra lista, attulmente vuota.
+  // isFavourite: false,
 };
 
 // costruiamo ora lo stato che andremo a modificare, passandogli però come stato di default l' inState
@@ -15,6 +16,7 @@ const favouritesReducer = function (state = inState, action) {
         // prima copiamo il precedente stato
         ...state,
         cont: [...state.cont, action.payload],
+        // isFavourite: true,
       };
 
     case REMOVE_ITEM:
@@ -22,6 +24,7 @@ const favouritesReducer = function (state = inState, action) {
         ...state,
         // per rimuove l'elemento copiamo l'arrey e poi filtriamo per indice gli elementi fino a trovare quello corretto
         cont: state.cont.filter((item, i) => i !== action.payload), // payload è il valore che gli diciamo di aggiungere o togliere
+        // isFavourite: false,
       };
 
     // prima settiamo il caso limite, quello errato

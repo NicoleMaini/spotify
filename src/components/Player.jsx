@@ -12,17 +12,14 @@ import { useState } from "react";
 function Player() {
   const dispatch = useDispatch();
   let song = useSelector(state => state.playSong.song);
-  console.log(song);
 
-  const [songQuery, setSongQuery] = useState([]);
+  const [classBi, setClassBi] = useState("bi-heart");
 
-  const controll = () => {
-    if (song.length > 1) {
-      setSongQuery(songQuery);
-    }
+  const handleclick = () => {
+    // setClassBi("bi-heart-fill");
+    dispatch(addSong(song));
   };
-  controll();
-  //
+
   return (
     <Container fluid className="fixed-bottom bg-container pt-1">
       <Row className="h-100">
@@ -30,18 +27,19 @@ function Player() {
           <Row className="h-100 justify-content-center align-items-center">
             <Col xs={6} md={4}>
               <div className="d-flex">
-                <img src={song.length !== 0 ? song.album.cover_medium : ""} alt="" width={50} className="me-2" />
+                <img
+                  src={song.length !== 0 ? song.album.cover_medium : ""}
+                  alt=""
+                  width={50}
+                  height={50}
+                  className="me-2"
+                />
                 <div>
                   <p className="text-white my-0">{song.length !== 0 ? song.title : "Title"}</p>
                   <p className="text-white my-0">{song.length !== 0 ? song.artist.name : "Artist"}</p>
                 </div>
-                <div
-                  className="heart ms-4"
-                  onClick={() => {
-                    dispatch(addSong(song));
-                  }}
-                >
-                  <i className="bi bi-heart text-white"></i>
+                <div className="heart ms-4" onClick={handleclick}>
+                  <i className={`bi ${classBi} text-white`} id="like"></i>
                 </div>
               </div>
             </Col>

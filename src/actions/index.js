@@ -2,6 +2,7 @@ export const ADD_LIST = "ADD_LIST";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const GET_FAVOURITE_SONG = "GET_FAVOURITE_SONG";
 export const GET_PLAY_SONG = "GET_PLAY_SONG";
+export const ADD_FAVOURITE = "ADD_FAVOURITE";
 
 // scriviamo le action creator ovvero le azioni che vanno inserite in dispatch
 
@@ -21,6 +22,13 @@ export const removeSong = i => {
 
 export const playSong = obj => {
   return { type: GET_PLAY_SONG, payload: obj };
+};
+
+export const isFavorites = () => {
+  return {
+    type: ADD_FAVOURITE,
+    payload: true,
+  };
 };
 
 // creiamo una fetch come actione creator
