@@ -7,18 +7,22 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addSong } from "../actions";
+import { useState } from "react";
 
 function Player() {
   const dispatch = useDispatch();
-  const song = useSelector(state => state.playSong.song);
+  let song = useSelector(state => state.playSong.song);
   console.log(song);
+
+  const [songQuery, setSongQuery] = useState([]);
+
   const controll = () => {
-    // questo è il solo modo nel quale ho potuto fare il controllo, altrimenti non mi prendeva l'array
     if (song.length > 1) {
+      setSongQuery(songQuery);
     }
   };
   controll();
-  // {song.length > 1 ? song.album.cover_medium : ""}
+  //
   return (
     <Container fluid className="fixed-bottom bg-container pt-1">
       <Row className="h-100">
@@ -26,13 +30,13 @@ function Player() {
           <Row className="h-100 justify-content-center align-items-center">
             <Col xs={6} md={4}>
               <div className="d-flex">
-                <img src={song.album.cover_medium} alt="" width={50} className="me-2" />
+                <img src={song.length !== 0 ? song.album.cover_medium : ""} alt="" width={50} className="me-2" />
                 <div>
-                  <p className="text-white my-0">{song.title}</p>
-                  <p className="text-white my-0">{song.artist.name}</p>
+                  <p className="text-white my-0">{song.length !== 0 ? song.title : "Title"}</p>
+                  <p className="text-white my-0">{song.length !== 0 ? song.artist.name : "Artist"}</p>
                 </div>
                 <div
-                  className="heart"
+                  className="heart ms-4"
                   onClick={() => {
                     dispatch(addSong(song));
                   }}
