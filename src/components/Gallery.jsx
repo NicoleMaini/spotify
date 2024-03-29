@@ -37,13 +37,7 @@ function Gallery(props) {
       <h2 className="sectionResults">{props.genre}</h2>
       <Row xs={2} md={3} lg={4} className="imgLinks py-3">
         {albums.slice(0, props.n).map(album => (
-          <AlbumCard
-            key={album.id}
-            id={album.id}
-            img={album.album.cover_medium}
-            title={album.title}
-            artist={album.artist.name}
-          />
+          <AlbumCard key={album.id} album={album} />
         ))}
       </Row>
     </Col>

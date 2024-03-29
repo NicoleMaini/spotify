@@ -17,9 +17,9 @@ function App() {
   const search = useSelector(state => state.favouriteSongs.list);
   console.log(search);
   const controll = () => {
-    const artist = search[0].artist.name;
-    if (artist !== searchQuery) {
-      setSearchQuery(artist);
+    // questo è il solo modo nel quale ho potuto fare il controllo, altrimenti non mi prendeva l'array
+    if (search.length > 1 && searchQuery !== search[0].artist.name) {
+      setSearchQuery(search[0].artist.name);
     }
   };
   controll();

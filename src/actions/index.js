@@ -1,6 +1,7 @@
 export const ADD_LIST = "ADD_LIST";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const GET_FAVOURITE_SONG = "GET_FAVOURITE_SONG";
+export const GET_PLAY_SONG = "GET_PLAY_SONG";
 
 // scriviamo le action creator ovvero le azioni che vanno inserite in dispatch
 
@@ -16,6 +17,10 @@ export const removeSong = i => {
     type: REMOVE_ITEM,
     payload: i,
   };
+};
+
+export const playSong = obj => {
+  return { type: GET_PLAY_SONG, payload: obj };
 };
 
 // creiamo una fetch come actione creator
@@ -45,7 +50,7 @@ export const getSong = searchQuery => {
           type: GET_FAVOURITE_SONG,
           payload: data.data,
         });
-        console.log(getState());
+        console.log("stati", getState());
       })
       .catch(error => console.log(error));
   };
