@@ -5,9 +5,11 @@ import play from "../assets/playerbuttons/play.png";
 import repeat from "../assets/playerbuttons/repeat.png";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addSong } from "../actions";
 
 function Player() {
+  const dispatch = useDispatch();
   const song = useSelector(state => state.playSong.song);
   console.log(song);
   const controll = () => {
@@ -28,6 +30,14 @@ function Player() {
                 <div>
                   <p className="text-white my-0">{song.title}</p>
                   <p className="text-white my-0">{song.artist.name}</p>
+                </div>
+                <div
+                  className="heart"
+                  onClick={() => {
+                    dispatch(addSong(song));
+                  }}
+                >
+                  <i className="bi bi-heart text-white"></i>
                 </div>
               </div>
             </Col>
