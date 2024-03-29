@@ -1,5 +1,3 @@
-// import logo from './logo.svg';
-// <img src={logo} className="App-logo" alt="logo" />
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
@@ -10,8 +8,22 @@ import { Col, Row } from "react-bootstrap";
 import Upbar from "./components/Upbar";
 import Gallery from "./components/Gallery";
 import Player from "./components/Player";
+import Library from "./components/Library";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState("madonna");
+  const search = useSelector(state => state.favouriteSongs.list);
+  console.log(search);
+  const controll = () => {
+    const artist = search[0].artist.name;
+    if (artist !== searchQuery) {
+      setSearchQuery(artist);
+    }
+  };
+  controll();
+
   return (
     <BrowserRouter>
       <Container fluid className="p-0 m-0">
@@ -23,15 +35,20 @@ function App() {
             <Container className="p-0 mainPage mb-7rem">
               <Upbar />
               <Routes>
+                <Route path="/library" element={<Library />}></Route>
                 <Route
                   path="/"
                   element={
                     <>
-                      <Gallery genre="Rock Classic" artist="queen" />
-                      <Gallery genre="Pop Culture" artist="katyperry" />
-                      <Gallery genre="#HipHop" artist="eminem" />
+                      <Gallery genre="Rock Classic" artist="queen" n={4} />
+                      <Gallery genre="Pop Culture" artist="katyperry" n={4} />
+                      <Gallery genre="#HipHop" artist="eminem" n={4} />
                     </>
                   }
+                ></Route>
+                <Route
+                  path="/search/:searchQuery"
+                  element={<Gallery genre="Search Results" artist={searchQuery} n={search.length} />}
                 ></Route>
               </Routes>
             </Container>

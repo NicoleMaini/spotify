@@ -173,3 +173,13 @@ ul {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+
+.heart {
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.heart:hover {
+  scale: 1.1;
+  transition: 0.3s;
+}

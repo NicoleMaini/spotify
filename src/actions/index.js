@@ -20,10 +20,16 @@ export const removeSong = i => {
 
 // creiamo una fetch come actione creator
 
-export const getCompaniesWork = baseEndpoint => {
+export const getSong = searchQuery => {
   return (dispatch, getState) => {
     // fare la fetch
-    fetch(baseEndpoint)
+    fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchQuery, {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+        "X-RapidAPI-Key": "9d408f0366mshab3b0fd8e5ecdf7p1b09f2jsne682a1797fa0",
+      },
+    })
       .then(resp => {
         if (resp.ok) {
           return resp.json();
@@ -34,10 +40,12 @@ export const getCompaniesWork = baseEndpoint => {
       .then(data => {
         // console.log(getState()); serve a vedere cosa è presente negli stati
         // e dispatcare l'array
+        console.log(data.data);
         dispatch({
           type: GET_FAVOURITE_SONG,
-          payload: data,
+          payload: data.data,
         });
+        console.log(getState());
       })
       .catch(error => console.log(error));
   };

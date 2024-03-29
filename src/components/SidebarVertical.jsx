@@ -1,30 +1,40 @@
 import { Container, Form, Nav, Navbar, Button, InputGroup } from "react-bootstrap";
 import logo from "../assets/logo/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getSong } from "../actions";
 
 function SidebarVertical() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const search = async event => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const songs = useSelector(state => state.favouriteSongs.list);
+  console.log("song", songs);
+
+  const search = event => {
     event.preventDefault();
-    try {
-      let response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchQuery, {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-          "X-RapidAPI-Key": "9d408f0366mshab3b0fd8e5ecdf7p1b09f2jsne682a1797fa0",
-        },
-      });
-      if (response.ok) {
-        let result = await response.json();
-        console.log(result);
-      } else {
-        throw new Error("error in search");
-      }
-    } catch (err) {
-      console.log("error", err);
-    }
+    dispatch(getSong(searchQuery));
+    navigate("/search/" + searchQuery);
+
+    // try {
+    //   let response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchQuery, {
+    //     method: "GET",
+    //     headers: {
+    //       "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+    //       "X-RapidAPI-Key": "9d408f0366mshab3b0fd8e5ecdf7p1b09f2jsne682a1797fa0",
+    //     },
+    //   });
+    //   if (response.ok) {
+    //     let result = await response.json();
+    //     console.log(result);
+    //   } else {
+    //     throw new Error("error in search");
+    //   }
+    // } catch (err) {
+    //   console.log("error", err);
+    // }
   };
 
   return (

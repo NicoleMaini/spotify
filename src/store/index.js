@@ -1,9 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import favouritesReducer from "../reducers/favouritesReducer";
+import favouriteSongsReducer from "../reducers/favouriteSongsReducer";
 
 const unifiefReducer = combineReducers({
+  favouriteSongs: favouriteSongsReducer,
   favourites: favouritesReducer,
-  //  playSong:
 });
 
 const store = configureStore({ reducer: unifiefReducer });
