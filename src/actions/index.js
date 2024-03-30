@@ -1,10 +1,7 @@
 export const ADD_LIST = "ADD_LIST";
 export const REMOVE_ITEM = "REMOVE_ITEM";
-export const GET_FAVOURITE_SONG = "GET_FAVOURITE_SONG";
+export const GET_LIST_SONG = "GET_LIST_SONG";
 export const GET_PLAY_SONG = "GET_PLAY_SONG";
-export const ADD_FAVOURITE = "ADD_FAVOURITE";
-
-// scriviamo le action creator ovvero le azioni che vanno inserite in dispatch
 
 export const addSong = obj => {
   return {
@@ -24,16 +21,7 @@ export const playSong = obj => {
   return { type: GET_PLAY_SONG, payload: obj };
 };
 
-export const isFavorites = () => {
-  return {
-    type: ADD_FAVOURITE,
-    payload: true,
-  };
-};
-
-// creiamo una fetch come actione creator
-
-export const getSong = searchQuery => {
+export const getSongs = searchQuery => {
   return (dispatch, getState) => {
     // fare la fetch
     fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchQuery, {
@@ -50,16 +38,12 @@ export const getSong = searchQuery => {
           throw new Error("Errore nel recupero dati");
         }
       })
-      .then(data => {
-        // console.log(getState()); serve a vedere cosa è presente negli stati
-        // e dispatcare l'array
-        console.log(data.data);
+      .then(obj => {
         dispatch({
-          type: GET_FAVOURITE_SONG,
-          payload: data.data,
+          type: GET_LIST_SONG,
+          payload: obj.data,
         });
-        console.log("stati", getState());
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log("Errore", error));
   };
 };

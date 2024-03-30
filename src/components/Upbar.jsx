@@ -1,5 +1,7 @@
 import { Row, Col, Nav } from "react-bootstrap";
 
+// qua ci penseremo se mai dovessimo farci qualcosa
+
 function Upbar() {
   return (
     <Row>

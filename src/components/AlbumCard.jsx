@@ -1,6 +1,7 @@
 import { Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { playSong } from "../actions";
+import Like from "./Like";
 
 function AlbumCard({ album }) {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function AlbumCard({ album }) {
           dispatch(playSong(album));
         }}
       />
+      <Like song={album} />
       <p className="mb-0">
         Track: "{`${album.title.length < 16 ? `${album.title}` : `${album.title.substring(0, 16)}...`}`}"
       </p>

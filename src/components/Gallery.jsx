@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import AlbumCard from "./AlbumCard";
-import { useDispatch } from "react-redux";
-import { addSong } from "../actions";
 
 function Gallery(props) {
   const [albums, setAlbums] = useState([]);
-  const dispatch = useDispatch();
-
+  // creiamo la fetch che recupera dai componenti i parametri che le servono per avviarsi
   const forSection = async () => {
     try {
       let response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + props.artist, {
@@ -20,6 +17,7 @@ function Gallery(props) {
       if (response.ok) {
         let obj = await response.json();
         console.log(obj.data);
+        // statiamo lo stato nello stato della funzione
         setAlbums(obj.data);
       } else {
         throw new Error("Error in fetching songs");
@@ -30,28 +28,20 @@ function Gallery(props) {
   };
 
   useEffect(() => {
+    // facciamo partire la fetch solo se la prop passata è definita
     if (props.artist !== undefined) {
       forSection();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.artist]);
 
   return (
+    // ritorniamo la card
     <Col md={10}>
       <h2 className="sectionResults">{props.genre}</h2>
       <Row xs={2} md={3} lg={4} className="imgLinks py-3">
-        {albums.slice(0, props.n).map(album => (
-          <div>
-            {" "}
-            <AlbumCard key={album.id} album={album} />
-            <div
-              className="heart text-center mb-3"
-              onClick={() => {
-                dispatch(addSong(album));
-              }}
-            >
-              <i className="bi bi-heart text-white"></i>
-            </div>
-          </div>
+        {albums.slice(0, props.n).map((album, i) => (
+          <AlbumCard key={album.id} album={album} />
         ))}
       </Row>
     </Col>

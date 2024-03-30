@@ -13,9 +13,16 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 function App() {
+  // 1 - settiamo lo stato per il nostro parametro di ricerca
+
   const [searchQuery, setSearchQuery] = useState("madonna");
-  const search = useSelector(state => state.favouriteSongs.list);
-  console.log(search);
+
+  // 2 - recuperiamo l'array delle canzoni fetchata all'invio del form e salvata nello stato globale listSongs
+  const search = useSelector(state => state.listSongs.list);
+  console.log("SERCH", search);
+
+  // 3 - creaimo una funzione che setta il parametro solo nel caso la lunghezza dell'array sia più grande di uno e
+  // il parametro attuale di ricerca sia diverso dal nome del'artista inserito
   const controll = () => {
     // questo è il solo modo nel quale ho potuto fare il controllo, altrimenti non mi prendeva l'array
     if (search.length > 1 && searchQuery !== search[0].artist.name) {

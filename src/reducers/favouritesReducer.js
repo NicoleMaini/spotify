@@ -13,18 +13,14 @@ const favouritesReducer = function (state = inState, action) {
     // nel caso di add
     case ADD_LIST:
       return {
-        // prima copiamo il precedente stato
         ...state,
         cont: [...state.cont, action.payload],
-        // isFavourite: true,
       };
 
     case REMOVE_ITEM:
       return {
         ...state,
-        // per rimuove l'elemento copiamo l'arrey e poi filtriamo per indice gli elementi fino a trovare quello corretto
-        cont: state.cont.filter((item, i) => i !== action.payload), // payload è il valore che gli diciamo di aggiungere o togliere
-        // isFavourite: false,
+        cont: state.cont.filter(item => item !== action.payload),
       };
 
     // prima settiamo il caso limite, quello errato

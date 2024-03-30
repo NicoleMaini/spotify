@@ -8,6 +8,7 @@ const playSongReducer = (state = initState, action) => {
   switch (action.type) {
     case GET_PLAY_SONG:
       return {
+        ...state,
         song: action.payload,
       };
     default:
