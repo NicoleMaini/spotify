@@ -19,7 +19,7 @@ function App() {
 
   // 2 - recuperiamo l'array delle canzoni fetchata all'invio del form e salvata nello stato globale listSongs
   const search = useSelector(state => state.listSongs.list);
-  console.log("SERCH", search);
+  // console.log("SERCH", search);
 
   // 3 - creaimo una funzione che setta il parametro solo nel caso la lunghezza dell'array sia più grande di uno e
   // il parametro attuale di ricerca sia diverso dal nome del'artista inserito

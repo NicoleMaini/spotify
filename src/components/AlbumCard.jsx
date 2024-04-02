@@ -5,6 +5,7 @@ import Like from "./Like";
 
 function AlbumCard({ album }) {
   const dispatch = useDispatch();
+  console.log("Id inviato da Album card", album.id);
 
   return (
     <Col className="text-center" id={album.id}>

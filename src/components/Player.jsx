@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 function Player() {
   // // recupero l'oggetto della canzone e l'array dei preferiti dallo stato globale
   let song = useSelector(state => state.playSong.song);
+  console.log("Id Inviato da player", song.id);
 
   return (
     <Container fluid className="fixed-bottom bg-container pt-1">
@@ -30,7 +31,7 @@ function Player() {
                   <p className="text-white my-0">{song.length !== 0 ? song.title : "Title"}</p>
                   <p className="text-white my-0">{song.length !== 0 ? song.artist.name : "Artist"}</p>
                 </div>
-                <Like song={song} />
+                <Like song={song} _id={song.id} />
               </div>
             </Col>
             <Col xs={6} md={4} className="playerControls">

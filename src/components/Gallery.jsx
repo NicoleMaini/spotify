@@ -16,7 +16,7 @@ function Gallery(props) {
       });
       if (response.ok) {
         let obj = await response.json();
-        console.log(obj.data);
+        // console.log(obj.data);
         // statiamo lo stato nello stato della funzione
         setAlbums(obj.data);
       } else {

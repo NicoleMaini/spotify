@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 function Like({ song }) {
   const dispatch = useDispatch();
 
+  console.log("Id di song passato a like", song.id);
+
   // 1 - recupero l'oggetto della canzone dalle prop e l'array dei preferiti dallo stato globale
   let favorites = useSelector(state => state.favourites.cont);
 
@@ -13,26 +15,28 @@ function Like({ song }) {
 
   // 3 - creo la funzione per far sapere al player che la "canzone riprodotta" è anche preferita
   const isFavouriteControll = () => {
-    favorites.filter(favorite => favorite.id === song.id && setIsFavorite(true));
+    favorites.filter(favorite => (favorite.id !== song.id ? setIsFavorite(false) : setIsFavorite(true)));
+    // favorites.filter(favorite => favorite.id !== _id && setIsFavorite(false));
   };
 
   // 3.5 - la faccio partire ad ogni oggetto song cambiato
   useEffect(() => {
     isFavouriteControll();
+    console.log("reload");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [song.id]);
+  }, [song.id, favorites.length]);
 
   // 4 - creo la funzione per aggiungere la canzone all'array dei preferiti, e setto lo stato a true, così il player sa che
   // la canzone è contenuta nell'array e riempie il cuoricino
   const handleclickAdd = () => {
-    console.log("ADD");
+    // console.log("ADD");
     dispatch(addSong(song));
     setIsFavorite(true);
   };
 
   // 4.5 stessa cosa, ma rimuove la canzone e svuota il cuoricino
   const handleclickRemove = () => {
-    console.log("REM");
+    // console.log("REM");
     dispatch(removeSong(song));
     setIsFavorite(false);
   };

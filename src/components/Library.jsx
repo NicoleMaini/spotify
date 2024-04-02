@@ -21,18 +21,18 @@ function Library() {
   useEffect(() => {
     controll();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [listSong.length]);
 
   return (
     <>
       {/* controllo 1 - se è null compare l'alert */}
-      {songItem === null && (
+      {listSong.length === 0 && (
         <Alert variant="warning" className="w-75 mt-5">
           Non hai aggiunto nessuna canzone hai preferiti
         </Alert>
       )}
       {/* controllo 2 - se NON è null allora carica la card */}
-      {songItem !== null && (
+      {songItem !== null && listSong.length !== 0 && (
         <Col md={10}>
           <h2 className="sectionResults">Your Library</h2>
           <Row xs={2} md={3} lg={4} className="imgLinks py-3">
